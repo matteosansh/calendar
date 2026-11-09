@@ -1,0 +1,44 @@
+{
+  "timezone": "Indian/Reunion",
+  "window_days_past": 30,
+  "window_days_future": 150,
+
+  "calendars": [
+    { "name": "Cours",  "color": "#f472b6", "url_env": "CAL_URL_1", "sync_to_notion": true  },
+    { "name": "Perso",  "color": "#60a5fa", "url_env": "CAL_URL_2", "sync_to_notion": false },
+    { "name": "Fériés", "color": "#facc15", "url_env": "CAL_URL_3", "sync_to_notion": false }
+  ],
+
+  "subject_rules": {
+    "strip_prefixes": ["^4A\\s*INFO\\s*-\\s*", "^4A\\s*-\\s*"],
+    "strip_type": "^(TD|TP\\d*|CM)\\s*-\\s*",
+    "type_regex": "^(TD|TP\\d*|CM)\\b",
+    "cut_after": ":",
+    "aliases": {
+      "RESEAUX INFORMATIQUES": "Réseaux informatiques",
+      "APPRENTISSAGE AUTOMATIQUE": "Apprentissage automatique",
+      "CYBERSECURITE": "Cybersécurité",
+      "INTERNET DES OBJETS": "Internet des objets",
+      "INNOVATION NUMERIQUE": "Innovation numérique",
+      "PROGRAMMATION MOBILE": "Programmation mobile",
+      "DROIT": "Droit",
+      "SAE": "SAE",
+      "ANGLAIS": "Anglais"
+    }
+  },
+
+  "notion": {
+    "calendar_db_id": "PUT_CALENDRIER_DATABASE_ID_HERE",
+    "subjects_db_id": "PUT_MATIERES_DATABASE_ID_HERE",
+    "props": {
+      "title": "Nom",
+      "date": "Date",
+      "google_id": "ID Google",
+      "subject_relation": "Matière",
+      "calendar_select": "Agenda",
+      "type_select": "Type",
+      "location": "Lieu"
+    },
+    "subjects_title_prop": "Nom"
+  }
+}

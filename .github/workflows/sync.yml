@@ -1,0 +1,41 @@
+name: Sync agendas
+
+on:
+  schedule:
+    - cron: "*/20 * * * *"   # toutes les 20 min (GitHub peut retarder de quelques minutes)
+  workflow_dispatch: {}       # bouton "Run workflow" pour lancer à la main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Synchronisation
+        env:
+          CAL_URL_1: ${{ secrets.CAL_URL_1 }}
+          CAL_URL_2: ${{ secrets.CAL_URL_2 }}
+          CAL_URL_3: ${{ secrets.CAL_URL_3 }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: python sync.py
+
+      - name: Publier events.json
+        run: |
+          git config user.name  "calendar-bot"
+          git config user.email "calendar-bot@users.noreply.github.com"
+          git add docs/events.json
+          git diff --staged --quiet || (git commit -m "sync agendas" && git push)
