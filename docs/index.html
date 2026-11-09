@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calendrier</title>
+<script src="vendor/fullcalendar.min.js"></script>
+<script src="vendor/fr.min.js"></script>
+<style>
+  :root {
+    --bg: #191919;
+    --panel: #202020;
+    --line: #2f2f2f;
+    --line-soft: #262626;
+    --text: #ececec;
+    --muted: #8b8b8b;
+    --today: #eb5757;
+    --radius: 6px;
+    color-scheme: dark;
+  }
+  /* sombre par défaut (comme ton Notion) ; ajoute ?theme=light à l'URL pour le mode clair */
+  :root[data-theme="light"] {
+    --bg: #ffffff; --panel: #f7f7f5; --line: #e6e6e3; --line-soft: #efefec;
+    --text: #2b2b2b; --muted: #8a8a85; color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--bg); color: var(--text);
+    font: 14px/1.4 ui-sans-serif, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    display: flex; flex-direction: column;
+  }
+
+  /* ---------- barre du haut ---------- */
+  .topbar {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    padding: 10px 16px; border-bottom: 1px solid var(--line-soft);
+  }
+  .title { display: flex; align-items: baseline; gap: 8px; margin-right: auto; }
+  .title h1 { font-size: 20px; margin: 0; font-weight: 700; text-transform: none; }
+  .title .week { font-size: 12px; color: var(--muted); }
+  .btn {
+    background: transparent; color: var(--text); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 5px 10px; font: inherit; cursor: pointer;
+  }
+  .btn:hover { background: var(--panel); }
+  .btn.icon { padding: 5px 9px; }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .seg button { border: 0; border-radius: 0; border-right: 1px solid var(--line); }
+  .seg button:last-child { border-right: 0; }
+  .seg button.active { background: var(--panel); font-weight: 600; }
+
+  /* ---------- mise en page ---------- */
+  .layout { flex: 1; min-height: 0; display: flex; }
+  .sidebar {
+    width: 190px; flex: none; padding: 14px 12px; border-right: 1px solid var(--line-soft);
+    overflow-y: auto;
+  }
+  .sidebar h2 { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px 4px; }
+  .cal-item {
+    display: flex; align-items: center; gap: 9px; padding: 6px 6px; border-radius: var(--radius);
+    cursor: pointer; user-select: none;
+  }
+  .cal-item:hover { background: var(--panel); }
+  .dot {
+    width: 14px; height: 14px; border-radius: 4px; border: 2px solid var(--c); background: var(--c);
+    flex: none; transition: background .12s;
+  }
+  .cal-item.off .dot { background: transparent; }
+  .cal-item.off .name { color: var(--muted); }
+  .cal-item .count { margin-left: auto; font-size: 11px; color: var(--muted); }
+  .stamp { margin: 18px 4px 0; font-size: 11px; color: var(--muted); }
+  #cal { flex: 1; min-width: 0; padding: 0 0 0 0; }
+  .hidden-sidebar .sidebar { display: none; }
+
+  /* ---------- FullCalendar : habillage « Notion Calendar » ---------- */
+  .fc { --fc-border-color: var(--line-soft); --fc-page-bg-color: var(--bg);
+        --fc-neutral-bg-color: var(--panel); --fc-now-indicator-color: var(--today);
+        --fc-today-bg-color: transparent; --fc-event-border-color: transparent;
+        font-size: 12px; height: 100%; }
+  .fc .fc-toolbar { display: none; }
+  .fc-theme-standard td, .fc-theme-standard th, .fc-theme-standard .fc-scrollgrid { border-color: var(--line-soft); }
+  .fc-theme-standard .fc-scrollgrid { border: 0; }
+  .fc .fc-col-header-cell { border-bottom: 1px solid var(--line-soft); }
+  .fc .fc-col-header-cell-cushion { padding: 8px 4px; color: var(--muted); font-weight: 500; text-transform: none; }
+  .fc .fc-day-today .fc-col-header-cell-cushion { color: var(--text); font-weight: 600; }
+  .fc .fc-day-today .day-num {
+    background: var(--today); color: #fff; border-radius: 5px; padding: 1px 5px; margin-left: 2px;
+  }
+  .fc .fc-timegrid-slot { height: 2.6em; }
+  .fc .fc-timegrid-slot-minor { border-top-style: none; }
+  .fc .fc-timegrid-slot-label-cushion { color: var(--muted); font-size: 11px; font-weight: 500; }
+  .fc .fc-timegrid-axis-cushion { color: var(--muted); font-size: 11px; }
+  .fc .fc-timegrid-now-indicator-line { border-width: 1px 0 0; }
+  .fc .fc-timegrid-now-indicator-arrow {
+    background: var(--today); color: #fff; border: 0; border-radius: 4px; margin-top: -9px;
+    margin-left: 0; padding: 1px 5px; font-size: 11px; font-weight: 700; line-height: 1.4;
+  }
+  .fc .fc-timegrid-event-harness-inset .fc-timegrid-event { box-shadow: none; }
+  .fc-v-event, .fc-h-event { background: transparent; border: 0; }
+  .fc .fc-timegrid-col-events { margin: 0 3px 0 1px; }
+
+  .ev {
+    --c: #888;
+    height: 100%; width: 100%; overflow: hidden; cursor: pointer;
+    background: color-mix(in srgb, var(--c) 30%, var(--bg));
+    border-left: 4px solid var(--c);
+    border-radius: 5px; padding: 4px 6px 3px 6px;
+    transition: filter .1s;
+  }
+  .ev:hover { filter: brightness(1.25); }
+  .ev .t { font-weight: 700; line-height: 1.22; word-break: break-word; overflow-wrap: anywhere; }
+  .ev .h { margin-top: 2px; font-size: 11px; color: color-mix(in srgb, var(--c) 75%, var(--text)); }
+  .ev.past { opacity: .55; }
+  .ev.allday {
+    height: auto; padding: 2px 8px; border-left-width: 3px; border-radius: 5px;
+    background: color-mix(in srgb, var(--c) 28%, var(--bg));
+    color: color-mix(in srgb, var(--c) 40%, var(--text)); font-weight: 600;
+  }
+  .fc .fc-daygrid-event-harness { margin: 1px 3px; }
+  .fc .fc-timegrid-axis { border-color: var(--line-soft); }
+  .fc .fc-daygrid-day-number { color: var(--muted); padding: 4px 6px; }
+  .fc .fc-day-today .fc-daygrid-day-number { color: #fff; background: var(--today); border-radius: 5px; margin: 3px; padding: 0 6px; }
+  .fc .fc-day-other .fc-daygrid-day-top { opacity: .4; }
+  .fc .fc-scroller { scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+  .fc .fc-more-link { color: var(--muted); font-weight: 600; }
+
+  /* ---------- fiche événement ---------- */
+  #pop {
+    position: fixed; z-index: 50; width: 300px; max-width: calc(100vw - 24px);
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.45); padding: 14px 16px 14px 16px; display: none;
+  }
+  #pop .bar { height: 4px; width: 36px; border-radius: 3px; margin-bottom: 10px; }
+  #pop h3 { margin: 0 0 6px; font-size: 15px; }
+  #pop .row { color: var(--muted); font-size: 12.5px; margin-top: 4px; }
+  #pop .row b { color: var(--text); font-weight: 500; }
+  #pop .desc { margin-top: 10px; font-size: 12.5px; white-space: pre-wrap; max-height: 140px; overflow: auto; }
+  #pop .x { position: absolute; top: 6px; right: 8px; cursor: pointer; color: var(--muted); border: 0; background: none; font-size: 18px; }
+  .msg { padding: 24px; color: var(--muted); }
+
+  /* ---------- étroit (embed Notion en colonne) ---------- */
+  @media (max-width: 760px) {
+    .sidebar {
+      width: 100%; border-right: 0; border-bottom: 1px solid var(--line-soft);
+      display: flex; flex-wrap: wrap; gap: 4px; padding: 8px 10px;
+    }
+    .sidebar h2, .stamp { display: none; }
+    .layout { flex-direction: column; }
+    .cal-item { padding: 3px 8px; border: 1px solid var(--line); }
+    .cal-item .count { display: none; }
+    .topbar { padding: 8px 10px; }
+    .title h1 { font-size: 17px; }
+    #btnSide { display: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="title"><h1 id="ttl">…</h1><span class="week" id="wk"></span></div>
+    <button class="btn icon" id="btnSide" title="Afficher / masquer les agendas">☰</button>
+    <div class="seg" id="views">
+      <button class="btn" data-v="timeGridDay">Jour</button>
+      <button class="btn" data-v="timeGridWeek">Semaine</button>
+      <button class="btn" data-v="dayGridMonth">Mois</button>
+    </div>
+    <button class="btn" id="today">Aujourd’hui</button>
+    <div class="seg">
+      <button class="btn icon" id="prev" aria-label="Précédent">‹</button>
+      <button class="btn icon" id="next" aria-label="Suivant">›</button>
+    </div>
+  </div>
+
+  <div class="layout" id="layout">
+    <aside class="sidebar" id="side"></aside>
+    <main id="cal"></main>
+  </div>
+
+  <div id="pop" role="dialog"></div>
+
+<script>
+(function () {
+  const DATA_URL = "events.json";
+  const REFRESH_MS = 5 * 60 * 1000;
+  const NARROW = 760;
+
+  let data = { calendars: [], events: [], generated_at: null };
+  let hidden = new Set();
+  try { hidden = new Set(JSON.parse(localStorage.getItem("cal.hidden") || "[]")); } catch (e) {}
+  const saveHidden = () => { try { localStorage.setItem("cal.hidden", JSON.stringify([...hidden])); } catch (e) {} };
+
+  const $ = (id) => document.getElementById(id);
+  const pop = $("pop");
+  const theme = new URLSearchParams(location.search).get("theme");   // ?theme=light | dark
+  if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const hhmm = (d) => d.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", hour12: false });
+
+  // ISO week number
+  function isoWeek(d) {
+    const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+    const dn = t.getUTCDay() || 7;
+    t.setUTCDate(t.getUTCDate() + 4 - dn);
+    const y0 = new Date(Date.UTC(t.getUTCFullYear(), 0, 1));
+    return Math.ceil(((t - y0) / 86400000 + 1) / 7);
+  }
+
+  const isNarrow = () => window.innerWidth < NARROW;
+  const calendar = new FullCalendar.Calendar($("cal"), {
+    locale: "fr",
+    firstDay: 1,
+    initialView: isNarrow() ? "timeGridDay" : "timeGridWeek",
+    headerToolbar: false,
+    height: "100%",
+    nowIndicator: true,
+    allDayText: "Toute la journée",
+    allDaySlot: true,
+    slotMinTime: "06:00:00",
+    slotMaxTime: "21:00:00",
+    scrollTime: "07:30:00",
+    slotDuration: "00:30:00",
+    slotLabelInterval: "01:00",
+    slotLabelFormat: { hour: "2-digit", minute: "2-digit", hour12: false },
+    eventTimeFormat: { hour: "2-digit", minute: "2-digit", hour12: false },
+    dayHeaderContent: (a) => {
+      if (a.view.type === "dayGridMonth") {
+        return a.date.toLocaleDateString("fr-FR", { weekday: "short" });
+      }
+      const w = a.date.toLocaleDateString("fr-FR", { weekday: "short" }).replace(".", "") + ".";
+      return { html: `${esc(w)} <span class="day-num">${a.date.getDate()}</span>` };
+    },
+    slotEventOverlap: false,
+    eventMaxStack: 3,
+    dayMaxEvents: 4,
+    expandRows: true,
+    navLinks: false,
+    eventContent: (arg) => {
+      const e = arg.event, c = e.extendedProps.color || "#888";
+      const past = e.end && e.end < new Date();
+      if (e.allDay) {
+        return { html: `<div class="ev allday" style="--c:${esc(c)}">${esc(e.title)}</div>` };
+      }
+      if (arg.view.type === "dayGridMonth") {
+        return { html: `<div class="ev allday${past ? " past" : ""}" style="--c:${esc(c)};font-weight:500">${esc(hhmm(e.start))} ${esc(e.title)}</div>` };
+      }
+      const range = `${hhmm(e.start)}–${e.end ? hhmm(e.end) : ""}`;
+      return { html: `<div class="ev${past ? " past" : ""}" style="--c:${esc(c)}"><div class="t">${esc(e.title)}</div><div class="h">${range}</div></div>` };
+    },
+    eventClick: (info) => { info.jsEvent.preventDefault(); showPop(info.event, info.jsEvent); },
+    datesSet: (info) => {
+      const mid = new Date((info.start.getTime() + info.end.getTime()) / 2);
+      const s = mid.toLocaleDateString("fr-FR", { month: "long", year: "numeric" });
+      $("ttl").textContent = s;
+      $("wk").textContent = info.view.type === "dayGridMonth" ? "" : "Semaine " + isoWeek(info.start);
+      document.querySelectorAll("#views button").forEach((b) => b.classList.toggle("active", b.dataset.v === info.view.type));
+      hidePop();
+    },
+  });
+  calendar.render();
+
+  // ---------- événements ----------
+  function visibleEvents() {
+    return data.events
+      .filter((e) => !hidden.has(e.calendar))
+      .map((e) => ({
+        id: e.id, title: e.title, start: e.start, end: e.end, allDay: e.allDay,
+        extendedProps: { color: e.color, calendar: e.calendar, location: e.location, description: e.description },
+      }));
+  }
+  function paint() {
+    calendar.removeAllEvents();
+    calendar.addEventSource(visibleEvents());
+  }
+
+  // ---------- barre latérale ----------
+  function renderSide() {
+    const counts = {};
+    data.events.forEach((e) => { counts[e.calendar] = (counts[e.calendar] || 0) + 1; });
+    let html = "<h2>Agendas</h2>";
+    data.calendars.forEach((c) => {
+      html += `<div class="cal-item${hidden.has(c.name) ? " off" : ""}" data-name="${esc(c.name)}" style="--c:${esc(c.color)}">
+        <span class="dot"></span><span class="name">${esc(c.name)}</span><span class="count">${counts[c.name] || 0}</span></div>`;
+    });
+    if (data.generated_at) {
+      const d = new Date(data.generated_at);
+      html += `<div class="stamp">Mis à jour ${d.toLocaleDateString("fr-FR", { day: "numeric", month: "short" })} à ${hhmm(d)}</div>`;
+    }
+    $("side").innerHTML = html;
+  }
+  $("side").addEventListener("click", (ev) => {
+    const it = ev.target.closest(".cal-item");
+    if (!it) return;
+    const n = it.dataset.name;
+    hidden.has(n) ? hidden.delete(n) : hidden.add(n);
+    saveHidden(); renderSide(); paint();
+  });
+
+  // ---------- fiche ----------
+  function hidePop() { pop.style.display = "none"; }
+  function showPop(e, mouse) {
+    const p = e.extendedProps;
+    const when = e.allDay
+      ? e.start.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" })
+      : `${e.start.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" })}<br>${hhmm(e.start)} – ${e.end ? hhmm(e.end) : ""}`;
+    pop.innerHTML = `<button class="x" aria-label="Fermer">×</button>
+      <div class="bar" style="background:${esc(p.color)}"></div>
+      <h3>${esc(e.title)}</h3>
+      <div class="row"><b>${when}</b></div>
+      <div class="row">Agenda : <b>${esc(p.calendar)}</b></div>
+      ${p.location ? `<div class="row">Lieu : <b>${esc(p.location)}</b></div>` : ""}
+      ${p.description ? `<div class="desc">${esc(p.description)}</div>` : ""}`;
+    pop.style.display = "block";
+    const w = pop.offsetWidth, h = pop.offsetHeight;
+    let x = mouse.clientX + 12, y = mouse.clientY + 8;
+    if (x + w > window.innerWidth - 8) x = Math.max(8, mouse.clientX - w - 12);
+    if (y + h > window.innerHeight - 8) y = Math.max(8, window.innerHeight - h - 8);
+    pop.style.left = x + "px"; pop.style.top = y + "px";
+  }
+  pop.addEventListener("click", (ev) => { if (ev.target.classList.contains("x")) hidePop(); });
+  document.addEventListener("keydown", (ev) => { if (ev.key === "Escape") hidePop(); });
+  document.addEventListener("mousedown", (ev) => { if (!pop.contains(ev.target) && !ev.target.closest(".ev")) hidePop(); });
+
+  // ---------- contrôles ----------
+  $("prev").onclick = () => calendar.prev();
+  $("next").onclick = () => calendar.next();
+  $("today").onclick = () => calendar.today();
+  $("views").addEventListener("click", (ev) => {
+    const b = ev.target.closest("button"); if (b) calendar.changeView(b.dataset.v);
+  });
+  $("btnSide").onclick = () => $("layout").classList.toggle("hidden-sidebar");
+  document.addEventListener("keydown", (ev) => {
+    if (ev.target.tagName === "INPUT" || ev.metaKey || ev.ctrlKey) return;
+    if (ev.key === "t") calendar.today();
+    if (ev.key === "ArrowLeft") calendar.prev();
+    if (ev.key === "ArrowRight") calendar.next();
+    if (ev.key === "d") calendar.changeView("timeGridDay");
+    if (ev.key === "w") calendar.changeView("timeGridWeek");
+    if (ev.key === "m") calendar.changeView("dayGridMonth");
+  });
+  let wasNarrow = isNarrow();
+  window.addEventListener("resize", () => {
+    const n = isNarrow();
+    if (n !== wasNarrow) {
+      wasNarrow = n;
+      calendar.changeView(n ? "timeGridDay" : "timeGridWeek");
+    }
+    calendar.updateSize();
+  });
+
+  // ---------- chargement ----------
+  async function load() {
+    try {
+      const r = await fetch(DATA_URL + "?t=" + Date.now(), { cache: "no-store" });
+      if (!r.ok) throw new Error(r.status);
+      data = await r.json();
+      renderSide(); paint();
+    } catch (e) {
+      if (!data.events.length) $("side").innerHTML = '<div class="msg">events.json introuvable. Lance d’abord la synchro (Actions → Sync agendas → Run workflow).</div>';
+    }
+  }
+  load();
+  setInterval(load, REFRESH_MS);
+})();
+</script>
+</body>
+</html>
