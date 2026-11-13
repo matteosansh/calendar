@@ -106,12 +106,12 @@ def parse_subject(title):
 # Notion
 # --------------------------------------------------------------------------
 class Notion:
-    def __init__(self, token):
+    def __init__(self, token, version=NOTION_VERSION):
         self.s = requests.Session()
         self.s.headers.update(
             {
                 "Authorization": f"Bearer {token}",
-                "Notion-Version": NOTION_VERSION,
+                "Notion-Version": version,
                 "Content-Type": "application/json",
             }
         )
@@ -127,13 +127,13 @@ class Notion:
             return r.json()
         raise RuntimeError("Notion: trop de 429")
 
-    def query_all(self, db_id, body=None):
+    def query_all(self, db_id, body=None, kind="databases"):
         body = dict(body or {})
         out, cursor = [], None
         while True:
             if cursor:
                 body["start_cursor"] = cursor
-            data = self.call("POST", f"/databases/{db_id}/query", json=body)
+            data = self.call("POST", f"/{kind}/{db_id}/query", json=body)
             out += data["results"]
             if not data.get("has_more"):
                 return out
@@ -240,6 +240,93 @@ def sync_notion(events, window_start, window_end):
     print(f"[notion] créés={created} mis à jour={updated} archivés={archived}")
 
 
+
+# --------------------------------------------------------------------------
+# Animes : chaque nouvel épisode vu dans Notion devient une entrée du calendrier
+# --------------------------------------------------------------------------
+def _local_date(value):
+    """'2026-11-13T10:30:00.000+00:00' ou '2026-11-13' -> date locale."""
+    if not value:
+        return None
+    if len(value) <= 10:
+        return date.fromisoformat(value)
+    return datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(TZ).date()
+
+
+def sync_animes(now):
+    cfg = CONFIG.get("animes") or {}
+    token = os.environ.get("NOTION_TOKEN", "").strip()
+    if not cfg.get("enabled") or not token or "PUT_" in cfg.get("data_source_id", "PUT_"):
+        return []
+
+    path = ROOT / "docs" / "anime_log.json"
+    try:
+        store = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        store = {"state": {}, "log": []}
+    before = json.dumps(store, sort_keys=True)
+    state, log = store["state"], store["log"]
+
+    P = cfg["props"]
+    # les bases à plusieurs sources (animes + jeux) exigent l'API 2025-09-03
+    pages = Notion(token, "2025-09-03").query_all(cfg["data_source_id"], kind="data_sources")
+
+    today = now.date()
+    seed_from = today - timedelta(days=7)
+
+    def add_entry(pid, title, day, first, last):
+        eid = f"{pid}|{day.isoformat()}"
+        for e in log:
+            if e["id"] == eid:
+                e.update(anime=title, first=min(e["first"], first), last=max(e["last"], last))
+                return
+        log.append({"id": eid, "anime": title, "date": day.isoformat(), "first": first, "last": last})
+
+    for pg in pages:
+        pr = pg["properties"]
+        ep = (pr.get(P["episode"]) or {}).get("number")
+        if ep is None:
+            continue
+        ep = int(ep)
+        title = "".join(t["plain_text"] for t in pr[P["title"]]["title"]).strip() or "(sans titre)"
+        lw = (pr.get(P["last_watched"]) or {}).get("date")
+        when = _local_date(lw["start"]) if lw else None
+        pid, prev = pg["id"], state.get(pg["id"])
+
+        if prev is None:                       # anime vu pour la première fois par le script
+            state[pid] = ep
+            if ep > 0 and when and when >= seed_from:
+                add_entry(pid, title, when, ep, ep)
+        elif ep > prev:                        # nouveaux épisodes vus
+            day = when if when and when >= today - timedelta(days=2) else today
+            add_entry(pid, title, day, prev + 1, ep)
+            state[pid] = ep
+        elif ep < prev:                        # compteur remis à zéro / corrigé
+            state[pid] = ep
+
+    keep_from = today - timedelta(days=400)
+    store["log"] = log = [e for e in log if date.fromisoformat(e["date"]) >= keep_from]
+    if json.dumps(store, sort_keys=True) != before:
+        path.write_text(json.dumps(store, ensure_ascii=False, indent=1), encoding="utf-8")
+        print(f"[animes] journal mis à jour ({len(log)} entrées)")
+    else:
+        print(f"[animes] rien de nouveau ({len(log)} entrées)")
+
+    window_from = today - timedelta(days=CONFIG["window_days_past"])
+    events = []
+    for e in log:
+        d = date.fromisoformat(e["date"])
+        if d < window_from:
+            continue
+        ep_txt = f"ép. {e['first']}" if e["first"] == e["last"] else f"ép. {e['first']}–{e['last']}"
+        events.append({
+            "id": "anime|" + e["id"], "title": f"{e['anime']} — {ep_txt}",
+            "start": e["date"], "end": e["date"], "allDay": True,
+            "location": "", "description": "Épisode(s) marqué(s) comme vu(s) dans Notion",
+            "calendar": cfg["name"], "color": cfg["color"], "sync_to_notion": False,
+        })
+    return events
+
 # --------------------------------------------------------------------------
 def main():
     now = datetime.now(TZ)
@@ -257,11 +344,18 @@ def main():
     if not all_events and failures:
         sys.exit("Aucun agenda récupéré, on ne touche à rien.")
 
+    try:
+        all_events += sync_animes(now)
+    except Exception as exc:  # les animes ne doivent jamais bloquer le reste
+        print(f"[x] Animes: {exc}", file=sys.stderr)
+
     all_events.sort(key=lambda e: e["start"])
     out = {
         "generated_at": now.isoformat(),
         "timezone": CONFIG["timezone"],
-        "calendars": [{"name": c["name"], "color": c["color"]} for c in CONFIG["calendars"]],
+        "calendars": [{"name": c["name"], "color": c["color"]} for c in CONFIG["calendars"]]
+        + ([{"name": CONFIG["animes"]["name"], "color": CONFIG["animes"]["color"]}]
+           if CONFIG.get("animes", {}).get("enabled") else []),
         "events": [{k: v for k, v in e.items() if k != "sync_to_notion"} for e in all_events],
     }
     target = ROOT / "docs" / "events.json"
