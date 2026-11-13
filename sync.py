@@ -201,8 +201,8 @@ def sync_notion(events, window_start, window_end):
         subject, kind = parse_subject(ev["title"])
         props = {
             P["title"]: {"title": [{"text": {"content": ev["title"][:200]}}]},
-            P["date"]: {"date": {"start": ev["start"], "end": ev["end"] if ev["end"] != ev["start"] else None,
-                                 "time_zone": None if ev["allDay"] else CONFIG["timezone"]}},
+            # le décalage horaire (+04:00) est déjà dans l'ISO : ne pas envoyer time_zone (Notion refuse les deux)
+            P["date"]: {"date": {"start": ev["start"], "end": ev["end"] if ev["end"] != ev["start"] else None}},
             P["google_id"]: {"rich_text": [{"text": {"content": ev["id"][:1900]}}]},
             P["calendar_select"]: {"select": {"name": ev["calendar"]}},
         }
