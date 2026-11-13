@@ -28,8 +28,8 @@
   },
 
   "notion": {
-    "calendar_db_id": "PUT_CALENDRIER_DATABASE_ID_HERE",
-    "subjects_db_id": "PUT_MATIERES_DATABASE_ID_HERE",
+    "calendar_db_id": "3ffe6618c87d80519517c8d47466384b",
+    "subjects_db_id": "891dbf3c3fda4726a2302a326b088d44",
     "props": {
       "title": "Nom",
       "date": "Date",
