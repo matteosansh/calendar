@@ -341,7 +341,15 @@
   $("views").addEventListener("click", (ev) => {
     const b = ev.target.closest("button"); if (b) calendar.changeView(b.dataset.v);
   });
-  $("btnSide").onclick = () => $("layout").classList.toggle("hidden-sidebar");
+  $("btnSide").onclick = () => {
+    $("layout").classList.toggle("hidden-sidebar");
+    requestAnimationFrame(() => calendar.updateSize());
+  };
+  // le calendrier s'étire dès que son conteneur change de taille (barre latérale, intégration Notion…)
+  if (window.ResizeObserver) {
+    let raf = 0;
+    new ResizeObserver(() => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => calendar.updateSize()); }).observe($("cal"));
+  }
   document.addEventListener("keydown", (ev) => {
     if (ev.target.tagName === "INPUT" || ev.metaKey || ev.ctrlKey) return;
     if (ev.key === "t") calendar.today();
