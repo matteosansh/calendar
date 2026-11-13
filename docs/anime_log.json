@@ -976,72 +976,72 @@
  },
  "log": [
   {
-   "id": "406e6618-c87d-81b9-9ce9-e0512e3e0d17|2026-11-13",
+   "id": "406e6618-c87d-81b9-9ce9-e0512e3e0d17|2026-11-13T14:30:00+04:00",
    "anime": "Kashita Maryoku wa [Revo Barai] de Kyousei Choushuu",
-   "date": "2026-11-13",
+   "start": "2026-11-13T14:30:00+04:00",
    "first": 6,
    "last": 6
   },
   {
-   "id": "406e6618-c87d-812c-9b07-e8ee5c082e79|2026-11-13",
+   "id": "406e6618-c87d-812c-9b07-e8ee5c082e79|2026-11-13T14:30:00+04:00",
    "anime": "Sekai Saikyou no Majo, Hajimemashita",
-   "date": "2026-11-13",
+   "start": "2026-11-13T14:30:00+04:00",
    "first": 5,
    "last": 5
   },
   {
-   "id": "406e6618-c87d-81e4-ab58-d9bc1d4a77d2|2026-11-13",
+   "id": "406e6618-c87d-81e4-ab58-d9bc1d4a77d2|2026-11-13T14:30:00+04:00",
    "anime": "Tensei Goblin Dakedo Shitsumon Aru?",
-   "date": "2026-11-13",
+   "start": "2026-11-13T14:30:00+04:00",
    "first": 6,
    "last": 6
   },
   {
-   "id": "406e6618-c87d-8118-bcc4-e0ee05d83ce2|2026-11-13",
+   "id": "406e6618-c87d-8118-bcc4-e0ee05d83ce2|2026-11-13T14:30:00+04:00",
    "anime": "Tsuihou Sareta Cheat Fuyo Majutsushi wa Kimama na Second Life wo Ouka Suru.",
-   "date": "2026-11-13",
+   "start": "2026-11-13T14:30:00+04:00",
    "first": 6,
    "last": 6
   },
   {
-   "id": "406e6618-c87d-81e7-9b41-ff3f0569b8ba|2026-11-13",
+   "id": "406e6618-c87d-81e7-9b41-ff3f0569b8ba|2026-11-13T14:30:00+04:00",
    "anime": "Shiotaiou no Satou-san ga Ore ni dake Amai",
-   "date": "2026-11-13",
+   "start": "2026-11-13T14:30:00+04:00",
    "first": 6,
    "last": 6
   },
   {
-   "id": "406e6618-c87d-81ca-9299-d89ab62d7bf7|2026-11-13",
+   "id": "406e6618-c87d-81ca-9299-d89ab62d7bf7|2026-11-13T14:30:00+04:00",
    "anime": "Seitokai ni mo Ana wa Aru!",
-   "date": "2026-11-13",
+   "start": "2026-11-13T14:30:00+04:00",
    "first": 6,
    "last": 6
   },
   {
-   "id": "406e6618-c87d-819c-8a9a-c35a980ab0ff|2026-11-13",
+   "id": "406e6618-c87d-819c-8a9a-c35a980ab0ff|2026-11-13T14:30:00+04:00",
    "anime": "Hyouken no Majutsushi ga Sekai wo Suberu II",
-   "date": "2026-11-13",
+   "start": "2026-11-13T14:30:00+04:00",
    "first": 4,
    "last": 4
   },
   {
-   "id": "406e6618-c87d-8136-865c-d19774faff73|2026-11-13",
+   "id": "406e6618-c87d-8136-865c-d19774faff73|2026-11-13T14:30:00+04:00",
    "anime": "Koori no Jouheki 2nd Season",
-   "date": "2026-11-13",
+   "start": "2026-11-13T14:30:00+04:00",
    "first": 6,
    "last": 6
   },
   {
-   "id": "406e6618-c87d-8112-89ce-e3bd8253997c|2026-11-13",
+   "id": "406e6618-c87d-8112-89ce-e3bd8253997c|2026-11-13T14:30:00+04:00",
    "anime": "Aoashi 2nd Season",
-   "date": "2026-11-13",
+   "start": "2026-11-13T14:30:00+04:00",
    "first": 6,
    "last": 6
   },
   {
-   "id": "406e6618-c87d-810d-8a20-f8db302c3ab9|2026-11-13",
+   "id": "406e6618-c87d-810d-8a20-f8db302c3ab9|2026-11-13T14:30:00+04:00",
    "anime": "Ao no Hako Season 2",
-   "date": "2026-11-13",
+   "start": "2026-11-13T14:30:00+04:00",
    "first": 5,
    "last": 5
   }
