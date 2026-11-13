@@ -18,8 +18,9 @@
     {
       "name": "Fériés",
       "color": "#facc15",
-      "url_env": "CAL_URL_3",
-      "sync_to_notion": false
+      "sync_to_notion": false,
+      "builtin": "holidays_fr",
+      "reunion": false
     }
   ],
   "subject_rules": {
@@ -65,6 +66,7 @@
       "title": "Titre",
       "episode": "Épisode",
       "last_watched": "Dernier visionnage"
-    }
+    },
+    "episode_minutes": 24
   }
 }

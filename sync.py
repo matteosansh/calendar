@@ -40,13 +40,69 @@ def to_local_iso(value):
     return value.isoformat(), True  # objet date -> journée entière
 
 
+def easter(year):
+    """Dimanche de Pâques (algorithme grégorien anonyme)."""
+    a, b, c = year % 19, year // 100, year % 100
+    d, e = b // 4, b % 4
+    f = (b + 8) // 25
+    g = (b - f + 1) // 3
+    h = (19 * a + b - d - g + 15) % 30
+    i, k = c // 4, c % 4
+    l = (32 + 2 * e + 2 * i - h - k) % 7
+    m = (a + 11 * h + 22 * l) // 451
+    month, day = divmod(h + l - 7 * m + 114, 31)
+    return date(year, month, day + 1)
+
+
+def french_holidays(year, reunion=False):
+    p = easter(year)
+    days = {
+        date(year, 1, 1): "Jour de l'An",
+        p + timedelta(days=1): "Lundi de Pâques",
+        date(year, 5, 1): "Fête du Travail",
+        date(year, 5, 8): "Victoire 1945",
+        p + timedelta(days=39): "Ascension",
+        p + timedelta(days=50): "Lundi de Pentecôte",
+        date(year, 7, 14): "Fête nationale",
+        date(year, 8, 15): "Assomption",
+        date(year, 11, 1): "Toussaint",
+        date(year, 11, 11): "L'Armistice",
+        date(year, 12, 25): "Noël",
+    }
+    if reunion:
+        days[date(year, 12, 20)] = "Abolition de l'esclavage"
+    return days
+
+
+def builtin_holidays(cal_cfg, start, end):
+    events = []
+    for year in range(start.year, end.year + 1):
+        for d, name in french_holidays(year, cal_cfg.get("reunion", False)).items():
+            if start.date() <= d <= end.date():
+                events.append({
+                    "id": f"holiday|{d.isoformat()}", "title": name,
+                    "start": d.isoformat(), "end": d.isoformat(), "allDay": True,
+                    "location": "", "description": "", "calendar": cal_cfg["name"],
+                    "color": cal_cfg["color"], "sync_to_notion": False,
+                })
+    print(f"[ok] {cal_cfg['name']}: {len(events)} jours fériés (intégrés)")
+    return events
+
+
 def fetch_calendar(cal_cfg, start, end):
+    if cal_cfg.get("builtin") == "holidays_fr":
+        return builtin_holidays(cal_cfg, start, end)
     url = os.environ.get(cal_cfg["url_env"], "").strip()
     if not url:
         print(f"[!] {cal_cfg['url_env']} absent -> agenda « {cal_cfg['name']} » ignoré")
         return []
     resp = requests.get(url, timeout=60)
     resp.raise_for_status()
+    if not resp.content.lstrip().startswith(b"BEGIN:VCALENDAR"):
+        raise RuntimeError(
+            f"{cal_cfg['url_env']} ne renvoie pas un fichier iCal (page web reçue). "
+            "Utilise « Adresse secrète au format iCal » : Paramètres de l'agenda -> Intégrer l'agenda."
+        )
     cal = Calendar.from_ical(resp.content)
     occurrences = recurring_ical_events.of(cal).between(start, end)
 
@@ -140,6 +196,16 @@ class Notion:
             cursor = data["next_cursor"]
 
 
+def same_time(a, b):
+    """Compare deux dates ISO même si leur écriture diffère (.000, Z, +04:00)."""
+    if not a or not b:
+        return a == b
+    try:
+        return datetime.fromisoformat(a.replace("Z", "+00:00")) == datetime.fromisoformat(b.replace("Z", "+00:00"))
+    except (ValueError, TypeError):
+        return a == b
+
+
 def rich(prop):
     return "".join(x["plain_text"] for x in prop.get("rich_text", []))
 
@@ -226,7 +292,9 @@ def sync_notion(events, window_start, window_end):
         else:
             old = page["properties"][P["date"]]["date"] or {}
             old_title = "".join(x["plain_text"] for x in page["properties"][P["title"]]["title"])
-            changed = (old.get("start") != ev["start"]) or (old_title != ev["title"][:200])
+            changed = (not same_time(old.get("start"), ev["start"])) \
+                or (not same_time(old.get("end"), ev["end"] if ev["end"] != ev["start"] else None)) \
+                or (old_title != ev["title"][:200])
             if changed:
                 n.call("PATCH", f"/pages/{page['id']}", json={"properties": props})
                 updated += 1
@@ -244,13 +312,13 @@ def sync_notion(events, window_start, window_end):
 # --------------------------------------------------------------------------
 # Animes : chaque nouvel épisode vu dans Notion devient une entrée du calendrier
 # --------------------------------------------------------------------------
-def _local_date(value):
-    """'2026-11-13T10:30:00.000+00:00' ou '2026-11-13' -> date locale."""
+def _when(value):
+    """ISO Notion -> datetime locale (avec heure) ou date (jour seul)."""
     if not value:
         return None
     if len(value) <= 10:
         return date.fromisoformat(value)
-    return datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(TZ).date()
+    return datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(TZ)
 
 
 def sync_animes(now):
@@ -264,23 +332,29 @@ def sync_animes(now):
         store = json.loads(path.read_text(encoding="utf-8"))
     except Exception:
         store = {"state": {}, "log": []}
+    if any("start" not in e for e in store["log"]):   # ancien format (jour seul) -> on repart propre
+        store = {"state": {}, "log": []}
     before = json.dumps(store, sort_keys=True)
     state, log = store["state"], store["log"]
 
     P = cfg["props"]
+    minutes = int(cfg.get("episode_minutes", 24))
     # les bases à plusieurs sources (animes + jeux) exigent l'API 2025-09-03
     pages = Notion(token, "2025-09-03").query_all(cfg["data_source_id"], kind="data_sources")
 
-    today = now.date()
-    seed_from = today - timedelta(days=7)
+    seed_from = now - timedelta(days=7)
 
-    def add_entry(pid, title, day, first, last):
-        eid = f"{pid}|{day.isoformat()}"
+    def day_of(w):
+        return w.date() if isinstance(w, datetime) else w
+
+    def add_entry(pid, title, when, first, last):
+        start = when.isoformat()                      # datetime avec heure, ou date seule
+        eid = f"{pid}|{start}"
         for e in log:
             if e["id"] == eid:
                 e.update(anime=title, first=min(e["first"], first), last=max(e["last"], last))
                 return
-        log.append({"id": eid, "anime": title, "date": day.isoformat(), "first": first, "last": last})
+        log.append({"id": eid, "anime": title, "start": start, "first": first, "last": last})
 
     for pg in pages:
         pr = pg["properties"]
@@ -290,42 +364,48 @@ def sync_animes(now):
         ep = int(ep)
         title = "".join(t["plain_text"] for t in pr[P["title"]]["title"]).strip() or "(sans titre)"
         lw = (pr.get(P["last_watched"]) or {}).get("date")
-        when = _local_date(lw["start"]) if lw else None
+        when = _when(lw["start"]) if lw else None
         pid, prev = pg["id"], state.get(pg["id"])
 
         if prev is None:                       # anime vu pour la première fois par le script
             state[pid] = ep
-            if ep > 0 and when and when >= seed_from:
+            if ep > 0 and when and day_of(when) >= seed_from.date():
                 add_entry(pid, title, when, ep, ep)
         elif ep > prev:                        # nouveaux épisodes vus
-            day = when if when and when >= today - timedelta(days=2) else today
-            add_entry(pid, title, day, prev + 1, ep)
+            recent = when is not None and day_of(when) >= (now - timedelta(days=2)).date()
+            add_entry(pid, title, when if recent else now, prev + 1, ep)
             state[pid] = ep
         elif ep < prev:                        # compteur remis à zéro / corrigé
             state[pid] = ep
 
-    keep_from = today - timedelta(days=400)
-    store["log"] = log = [e for e in log if date.fromisoformat(e["date"]) >= keep_from]
+    keep_from = (now - timedelta(days=400)).date()
+    store["log"] = log = [e for e in log if day_of(_when(e["start"])) >= keep_from]
     if json.dumps(store, sort_keys=True) != before:
         path.write_text(json.dumps(store, ensure_ascii=False, indent=1), encoding="utf-8")
         print(f"[animes] journal mis à jour ({len(log)} entrées)")
     else:
         print(f"[animes] rien de nouveau ({len(log)} entrées)")
 
-    window_from = today - timedelta(days=CONFIG["window_days_past"])
+    window_from = (now - timedelta(days=CONFIG["window_days_past"])).date()
     events = []
     for e in log:
-        d = date.fromisoformat(e["date"])
-        if d < window_from:
+        w = _when(e["start"])
+        if day_of(w) < window_from:
             continue
-        ep_txt = f"ép. {e['first']}" if e["first"] == e["last"] else f"ép. {e['first']}–{e['last']}"
+        n = e["last"] - e["first"] + 1
+        ep_txt = f"ép. {e['first']}" if n == 1 else f"ép. {e['first']}–{e['last']}"
+        if isinstance(w, datetime):
+            start, end, all_day = w.isoformat(), (w + timedelta(minutes=min(minutes * n, 240))).isoformat(), False
+        else:
+            start = end = w.isoformat(); all_day = True
         events.append({
             "id": "anime|" + e["id"], "title": f"{e['anime']} — {ep_txt}",
-            "start": e["date"], "end": e["date"], "allDay": True,
+            "start": start, "end": end, "allDay": all_day,
             "location": "", "description": "Épisode(s) marqué(s) comme vu(s) dans Notion",
             "calendar": cfg["name"], "color": cfg["color"], "sync_to_notion": False,
         })
     return events
+
 
 # --------------------------------------------------------------------------
 def main():

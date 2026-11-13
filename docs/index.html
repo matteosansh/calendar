@@ -117,6 +117,8 @@
     background: color-mix(in srgb, var(--c) 28%, var(--bg));
     color: color-mix(in srgb, var(--c) 40%, var(--text)); font-weight: 600;
   }
+  .ev.short { padding: 2px 6px; display: flex; align-items: center; }
+  .ev.short .t { font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .ev.allday { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .fc .fc-daygrid-event-harness { margin: 1px 3px; }
   .fc .fc-timegrid-axis { border-color: var(--line-soft); }
@@ -243,6 +245,10 @@
       }
       if (arg.view.type === "dayGridMonth") {
         return { html: `<div class="ev allday${past ? " past" : ""}" style="--c:${esc(c)};font-weight:500">${esc(hhmm(e.start))} ${esc(e.title)}</div>` };
+      }
+      const mins = e.end ? (e.end - e.start) / 60000 : 60;
+      if (mins < 45) {   // bloc court (ex. un épisode d'anime) : une seule ligne
+        return { html: `<div class="ev short${past ? " past" : ""}" style="--c:${esc(c)}"><span class="t">${esc(e.title)}</span></div>` };
       }
       const range = `${hhmm(e.start)}–${e.end ? hhmm(e.end) : ""}`;
       return { html: `<div class="ev${past ? " past" : ""}" style="--c:${esc(c)}"><div class="t">${esc(e.title)}</div><div class="h">${range}</div></div>` };
