@@ -21,7 +21,8 @@ Google Agenda (web) → ⚙ Paramètres → clique l'agenda → **Intégrer l'ag
 
 Dans le dépôt : **Settings → Secrets and variables → Actions → New repository secret**
 - `CAL_URL_1` = adresse de l'agenda « Cours »
-- `CAL_URL_2` = « Perso », `CAL_URL_3` = « Fériés » (ajoute-en d'autres dans `config.json` + `sync.yml`)
+- `CAL_URL_2` = « Fériés » (calendrier des jours fériés), `CAL_URL_3` = « Perso » (ajoute-en d'autres dans `config.json` + `sync.yml`).
+  Sans agenda Google des fériés, mets `"builtin": "holidays_fr"` à la place de `url_env` : le script calcule les fériés français (+ `"reunion": true` pour le 20 décembre)
 
 Noms, couleurs et agendas à envoyer vers Notion (`sync_to_notion`) : `config.json`.
 

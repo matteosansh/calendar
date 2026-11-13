@@ -10,17 +10,16 @@
       "sync_to_notion": true
     },
     {
-      "name": "Perso",
-      "color": "#60a5fa",
+      "name": "Fériés",
+      "color": "#facc15",
       "url_env": "CAL_URL_2",
       "sync_to_notion": false
     },
     {
-      "name": "Fériés",
-      "color": "#facc15",
-      "sync_to_notion": false,
-      "builtin": "holidays_fr",
-      "reunion": false
+      "name": "Perso",
+      "color": "#60a5fa",
+      "url_env": "CAL_URL_3",
+      "sync_to_notion": false
     }
   ],
   "subject_rules": {
