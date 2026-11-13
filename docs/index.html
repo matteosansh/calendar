@@ -50,6 +50,12 @@
   .seg button:last-child { border-right: 0; }
   .seg button.active { background: var(--panel); font-weight: 600; }
 
+  /* intégré dans Notion : un bouton « Afficher l'original » recouvre le coin haut-droit -> on décale les boutons */
+  .embedded .topbar { padding-right: 180px; }
+  @media (max-width: 760px) {
+    .embedded .topbar { padding-right: 10px; padding-top: 42px; }
+  }
+
   /* ---------- mise en page ---------- */
   .layout { flex: 1; min-height: 0; display: flex; }
   .sidebar {
@@ -194,6 +200,7 @@
 
   const $ = (id) => document.getElementById(id);
   const pop = $("pop");
+  try { if (window.self !== window.top) document.documentElement.classList.add("embedded"); } catch (e) { document.documentElement.classList.add("embedded"); }
   const theme = new URLSearchParams(location.search).get("theme");   // ?theme=light | dark
   if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
