@@ -77,7 +77,7 @@
   .cal-item .count { margin-left: auto; font-size: 11px; color: var(--muted); }
   .stamp { margin: 18px 4px 0; font-size: 11px; color: var(--muted); }
   #cal { flex: 1; min-width: 0; padding: 0 0 0 0; }
-  .hidden-sidebar .sidebar { display: none; }
+  @media (min-width: 761px) { .hidden-sidebar .sidebar { display: none; } }
 
   /* ---------- FullCalendar : habillage « Notion Calendar » ---------- */
   .fc { --fc-border-color: var(--line-soft); --fc-page-bg-color: var(--bg);
@@ -180,7 +180,7 @@
     </div>
   </div>
 
-  <div class="layout" id="layout">
+  <div class="layout hidden-sidebar" id="layout">
     <aside class="sidebar" id="side"></aside>
     <main id="cal"></main>
   </div>
@@ -341,8 +341,11 @@
   $("views").addEventListener("click", (ev) => {
     const b = ev.target.closest("button"); if (b) calendar.changeView(b.dataset.v);
   });
+  // barre des agendas masquée par défaut ; ton choix (☰) est mémorisé
+  try { if (localStorage.getItem("cal.side") === "show") $("layout").classList.remove("hidden-sidebar"); } catch (e) {}
   $("btnSide").onclick = () => {
-    $("layout").classList.toggle("hidden-sidebar");
+    const hid = $("layout").classList.toggle("hidden-sidebar");
+    try { localStorage.setItem("cal.side", hid ? "hide" : "show"); } catch (e) {}
     requestAnimationFrame(() => calendar.updateSize());
   };
   // le calendrier s'étire dès que son conteneur change de taille (barre latérale, intégration Notion…)
