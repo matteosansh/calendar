@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-26T19:46:20.954229+04:00",
+ "generated_at": "2026-11-27T04:20:57.421523+04:00",
  "timezone": "Indian/Reunion",
  "calendars": [
   {
@@ -208,24 +208,13 @@
    "color": "#a78bfa"
   },
   {
-   "id": "ADE60323032362d323032372d32303033322d302d30|2026-11-26T08:30:00+04:00",
-   "title": "4A INFO-CM-SAE INTERNET DES OBJETS",
-   "start": "2026-11-26T08:30:00+04:00",
-   "end": "2026-11-26T10:30:00+04:00",
+   "id": "ADE60323032362d323032372d31393936312d302d32|2026-11-27T08:30:00+04:00",
+   "title": "4A INFO-TP1-DROIT ET ETHIQUE EN INGENIERIE INFORMATIQUE",
+   "start": "2026-11-27T08:30:00+04:00",
+   "end": "2026-11-27T10:30:00+04:00",
    "allDay": false,
-   "location": "A101 - Info / Multimédia",
-   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nHARIVELO FANILO\n(Exported :26/11/2026 19:46)",
-   "calendar": "Cours",
-   "color": "#f472b6"
-  },
-  {
-   "id": "ADE60323032362d323032372d31393834332d302d30|2026-11-26T10:30:00+04:00",
-   "title": "4A-TP-ANGLAIS INFO",
-   "start": "2026-11-26T10:30:00+04:00",
-   "end": "2026-11-26T12:30:00+04:00",
-   "allDay": false,
-   "location": "A313 - Salle projet",
-   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nLYNCH EDEL\n(Exported :26/11/2026 19:46)",
+   "location": "A103 - Salle info commune",
+   "description": "Informatique 4A Groupe 1\nMOTAIS DE NARBONNE BERENICE\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -236,29 +225,7 @@
    "end": "2026-11-27T10:30:00+04:00",
    "allDay": false,
    "location": "A101 - Info / Multimédia",
-   "description": "Informatique 4A Groupe 2\nLEPETIT MALTHILDE\n(Exported :26/11/2026 19:46)",
-   "calendar": "Cours",
-   "color": "#f472b6"
-  },
-  {
-   "id": "ADE60323032362d323032372d31393936312d302d32|2026-11-27T08:30:00+04:00",
-   "title": "4A INFO-TP1-DROIT ET ETHIQUE EN INGENIERIE INFORMATIQUE",
-   "start": "2026-11-27T08:30:00+04:00",
-   "end": "2026-11-27T10:30:00+04:00",
-   "allDay": false,
-   "location": "A103 - Salle info commune",
-   "description": "Informatique 4A Groupe 1\nMOTAIS DE NARBONNE BERENICE\n(Exported :26/11/2026 19:46)",
-   "calendar": "Cours",
-   "color": "#f472b6"
-  },
-  {
-   "id": "ADE60323032362d323032372d32333130392d302d34|2026-11-27T10:30:00+04:00",
-   "title": "4A INFO-TP2-DROIT ET ETHIQUE EN INGENIERIE INFORMATIQUE",
-   "start": "2026-11-27T10:30:00+04:00",
-   "end": "2026-11-27T12:30:00+04:00",
-   "allDay": false,
-   "location": "A101 - Info / Multimédia",
-   "description": "Informatique 4A Groupe 2\nMOTAIS DE NARBONNE BERENICE\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 2\nLEPETIT MALTHILDE\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -269,7 +236,18 @@
    "end": "2026-11-27T12:30:00+04:00",
    "allDay": false,
    "location": "A103 - Salle info commune",
-   "description": "Informatique 4A Groupe 1\nLEPETIT MALTHILDE\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 1\nLEPETIT MALTHILDE\n(Exported :27/11/2026 04:20)",
+   "calendar": "Cours",
+   "color": "#f472b6"
+  },
+  {
+   "id": "ADE60323032362d323032372d32333130392d302d34|2026-11-27T10:30:00+04:00",
+   "title": "4A INFO-TP2-DROIT ET ETHIQUE EN INGENIERIE INFORMATIQUE",
+   "start": "2026-11-27T10:30:00+04:00",
+   "end": "2026-11-27T12:30:00+04:00",
+   "allDay": false,
+   "location": "A101 - Info / Multimédia",
+   "description": "Informatique 4A Groupe 2\nMOTAIS DE NARBONNE BERENICE\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -280,7 +258,7 @@
    "end": "2026-11-27T15:30:00+04:00",
    "allDay": false,
    "location": "A103 - Salle info commune",
-   "description": "Informatique 4A Groupe 1\nPAYET DENIS\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 1\nPAYET DENIS\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -291,18 +269,7 @@
    "end": "2026-11-27T15:30:00+04:00",
    "allDay": false,
    "location": "A101 - Info / Multimédia",
-   "description": "Informatique 4A Groupe 2\nRAZAFINDRALAMBO TAHIRY\n(Exported :26/11/2026 19:46)",
-   "calendar": "Cours",
-   "color": "#f472b6"
-  },
-  {
-   "id": "ADE60323032362d323032372d32333039342d302d31|2026-11-27T15:30:00+04:00",
-   "title": "4A INFO-TP1-CYBERSECURITE:METHODOLOGIES DE SECURITE OFFENSIVE",
-   "start": "2026-11-27T15:30:00+04:00",
-   "end": "2026-11-27T17:30:00+04:00",
-   "allDay": false,
-   "location": "A101 - Info / Multimédia",
-   "description": "Informatique 4A Groupe 1\nRAZAFINDRALAMBO TAHIRY\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 2\nRAZAFINDRALAMBO TAHIRY\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -313,7 +280,18 @@
    "end": "2026-11-27T17:30:00+04:00",
    "allDay": false,
    "location": "A103 - Salle info commune",
-   "description": "Informatique 4A Groupe 2\nPAYET DENIS\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 2\nPAYET DENIS\n(Exported :27/11/2026 04:20)",
+   "calendar": "Cours",
+   "color": "#f472b6"
+  },
+  {
+   "id": "ADE60323032362d323032372d32333039342d302d31|2026-11-27T15:30:00+04:00",
+   "title": "4A INFO-TP1-CYBERSECURITE:METHODOLOGIES DE SECURITE OFFENSIVE",
+   "start": "2026-11-27T15:30:00+04:00",
+   "end": "2026-11-27T17:30:00+04:00",
+   "allDay": false,
+   "location": "A101 - Info / Multimédia",
+   "description": "Informatique 4A Groupe 1\nRAZAFINDRALAMBO TAHIRY\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -324,7 +302,7 @@
    "end": "2026-11-28T12:30:00+04:00",
    "allDay": false,
    "location": "A100 - Info / Réseaux",
-   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\n(Exported :26/11/2026 19:46)",
+   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -335,7 +313,7 @@
    "end": "2026-11-30T10:30:00+04:00",
    "allDay": false,
    "location": "A103 - Salle info commune",
-   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nGROUFFAUD JOEL\n(Exported :26/11/2026 19:46)",
+   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nGROUFFAUD JOEL\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -346,7 +324,7 @@
    "end": "2026-11-30T12:30:00+04:00",
    "allDay": false,
    "location": "A101 - Info / Multimédia",
-   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nGROUFFAUD JOEL\n(Exported :26/11/2026 19:46)",
+   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nGROUFFAUD JOEL\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -357,7 +335,7 @@
    "end": "2026-12-01T10:30:00+04:00",
    "allDay": false,
    "location": "A100 - Info / Réseaux",
-   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nTOURNOUX PIERRE UGO\n(Exported :26/11/2026 19:46)",
+   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nTOURNOUX PIERRE UGO\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -368,7 +346,7 @@
    "end": "2026-12-01T12:30:00+04:00",
    "allDay": false,
    "location": "A100 - Info / Réseaux",
-   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nTOURNOUX PIERRE UGO\n(Exported :26/11/2026 19:46)",
+   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nTOURNOUX PIERRE UGO\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -379,7 +357,7 @@
    "end": "2026-12-01T15:30:00+04:00",
    "allDay": false,
    "location": "",
-   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\n(Exported :26/11/2026 19:46)",
+   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -390,7 +368,7 @@
    "end": "2026-12-02T12:30:00+04:00",
    "allDay": false,
    "location": "A300 - ESI ' DE",
-   "description": "CYCLE INGENIEUR AGROALIMENTAIRE (2EME ANNEE)\nCYCLE INGENIEUR BATIMENT-ENERGIE (2EME ANNEE)\nCYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nVATIER MARGUERITE\nADDI KHALID\n(Exported :26/11/2026 19:46)",
+   "description": "CYCLE INGENIEUR AGROALIMENTAIRE (2EME ANNEE)\nCYCLE INGENIEUR BATIMENT-ENERGIE (2EME ANNEE)\nCYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nVATIER MARGUERITE\nADDI KHALID\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -401,7 +379,7 @@
    "end": "2026-12-02T15:30:00+04:00",
    "allDay": false,
    "location": "A103 - Salle info commune",
-   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nLEPETIT MALTHILDE\n(Exported :26/11/2026 19:46)",
+   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nLEPETIT MALTHILDE\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -412,7 +390,7 @@
    "end": "2026-12-03T10:30:00+04:00",
    "allDay": false,
    "location": "A101 - Info / Multimédia",
-   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nTOURNOUX PIERRE UGO\n(Exported :26/11/2026 19:46)",
+   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nTOURNOUX PIERRE UGO\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -423,18 +401,7 @@
    "end": "2026-12-03T12:30:00+04:00",
    "allDay": false,
    "location": "A101 - Info / Multimédia",
-   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nTOURNOUX PIERRE UGO\n(Exported :26/11/2026 19:46)",
-   "calendar": "Cours",
-   "color": "#f472b6"
-  },
-  {
-   "id": "ADE60323032362d323032372d31313132342d302d34|2026-12-04T08:30:00+04:00",
-   "title": "4A INFO-TP2-CYBERSECURITE:METHODOLOGIES DE SECURITE OFFENSIVE",
-   "start": "2026-12-04T08:30:00+04:00",
-   "end": "2026-12-04T10:30:00+04:00",
-   "allDay": false,
-   "location": "A103 - Salle info commune",
-   "description": "Informatique 4A Groupe 2\nRAZAFINDRALAMBO TAHIRY\n(Exported :26/11/2026 19:46)",
+   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nTOURNOUX PIERRE UGO\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -445,18 +412,18 @@
    "end": "2026-12-04T10:30:00+04:00",
    "allDay": false,
    "location": "A101 - Info / Multimédia",
-   "description": "Informatique 4A Groupe 1\nMOTAIS DE NARBONNE BERENICE\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 1\nMOTAIS DE NARBONNE BERENICE\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
   {
-   "id": "ADE60323032362d323032372d32333039342d302d34|2026-12-04T10:30:00+04:00",
-   "title": "4A INFO-TP1-CYBERSECURITE:METHODOLOGIES DE SECURITE OFFENSIVE",
-   "start": "2026-12-04T10:30:00+04:00",
-   "end": "2026-12-04T12:30:00+04:00",
+   "id": "ADE60323032362d323032372d31313132342d302d34|2026-12-04T08:30:00+04:00",
+   "title": "4A INFO-TP2-CYBERSECURITE:METHODOLOGIES DE SECURITE OFFENSIVE",
+   "start": "2026-12-04T08:30:00+04:00",
+   "end": "2026-12-04T10:30:00+04:00",
    "allDay": false,
-   "location": "A101 - Info / Multimédia",
-   "description": "Informatique 4A Groupe 1\nRAZAFINDRALAMBO TAHIRY\n(Exported :26/11/2026 19:46)",
+   "location": "A103 - Salle info commune",
+   "description": "Informatique 4A Groupe 2\nRAZAFINDRALAMBO TAHIRY\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -467,7 +434,18 @@
    "end": "2026-12-04T12:30:00+04:00",
    "allDay": false,
    "location": "A103 - Salle info commune",
-   "description": "Informatique 4A Groupe 2\nMOTAIS DE NARBONNE BERENICE\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 2\nMOTAIS DE NARBONNE BERENICE\n(Exported :27/11/2026 04:20)",
+   "calendar": "Cours",
+   "color": "#f472b6"
+  },
+  {
+   "id": "ADE60323032362d323032372d32333039342d302d34|2026-12-04T10:30:00+04:00",
+   "title": "4A INFO-TP1-CYBERSECURITE:METHODOLOGIES DE SECURITE OFFENSIVE",
+   "start": "2026-12-04T10:30:00+04:00",
+   "end": "2026-12-04T12:30:00+04:00",
+   "allDay": false,
+   "location": "A101 - Info / Multimédia",
+   "description": "Informatique 4A Groupe 1\nRAZAFINDRALAMBO TAHIRY\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -478,7 +456,7 @@
    "end": "2026-12-04T15:30:00+04:00",
    "allDay": false,
    "location": "A103 - Salle info commune",
-   "description": "Informatique 4A Groupe 1\nPAYET DENIS\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 1\nPAYET DENIS\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -489,7 +467,7 @@
    "end": "2026-12-04T17:30:00+04:00",
    "allDay": false,
    "location": "A103 - Salle info commune",
-   "description": "Informatique 4A Groupe 2\nPAYET DENIS\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 2\nPAYET DENIS\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -500,7 +478,7 @@
    "end": "2026-12-05T12:30:00+04:00",
    "allDay": false,
    "location": "A103 - Salle info commune",
-   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\n(Exported :26/11/2026 19:46)",
+   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -511,7 +489,7 @@
    "end": "2026-12-08T10:30:00+04:00",
    "allDay": false,
    "location": "A313 - Salle projet",
-   "description": "Informatique 4A Groupe 2\nLEPETIT MALTHILDE\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 2\nLEPETIT MALTHILDE\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -522,7 +500,7 @@
    "end": "2026-12-08T10:30:00+04:00",
    "allDay": false,
    "location": "A101 - Info / Multimédia",
-   "description": "Informatique 4A Groupe 1\nTOURNOUX PIERRE UGO\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 1\nTOURNOUX PIERRE UGO\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -533,7 +511,7 @@
    "end": "2026-12-08T12:30:00+04:00",
    "allDay": false,
    "location": "",
-   "description": "Informatique 4A Groupe 2\nTOURNOUX PIERRE UGO\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 2\nTOURNOUX PIERRE UGO\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -544,7 +522,7 @@
    "end": "2026-12-08T12:30:00+04:00",
    "allDay": false,
    "location": "A101 - Info / Multimédia",
-   "description": "Informatique 4A Groupe 1\nLEPETIT MALTHILDE\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 1\nLEPETIT MALTHILDE\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -555,7 +533,7 @@
    "end": "2026-12-08T15:30:00+04:00",
    "allDay": false,
    "location": "A103 - Salle info commune",
-   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nGROUFFAUD JOEL\n(Exported :26/11/2026 19:46)",
+   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nGROUFFAUD JOEL\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -566,7 +544,7 @@
    "end": "2026-12-09T12:30:00+04:00",
    "allDay": false,
    "location": "A300 - ESI ' DE",
-   "description": "CYCLE INGENIEUR AGROALIMENTAIRE (2EME ANNEE)\nCYCLE INGENIEUR BATIMENT-ENERGIE (2EME ANNEE)\nCYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nVATIER MARGUERITE\nADDI KHALID\n(Exported :26/11/2026 19:46)",
+   "description": "CYCLE INGENIEUR AGROALIMENTAIRE (2EME ANNEE)\nCYCLE INGENIEUR BATIMENT-ENERGIE (2EME ANNEE)\nCYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nVATIER MARGUERITE\nADDI KHALID\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -577,7 +555,7 @@
    "end": "2026-12-10T10:30:00+04:00",
    "allDay": false,
    "location": "A103 - Salle info commune",
-   "description": "Informatique 4A Groupe 2\nTOURNOUX PIERRE UGO\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 2\nTOURNOUX PIERRE UGO\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -588,18 +566,7 @@
    "end": "2026-12-10T12:30:00+04:00",
    "allDay": false,
    "location": "A103 - Salle info commune",
-   "description": "Informatique 4A Groupe 1\nTOURNOUX PIERRE UGO\n(Exported :26/11/2026 19:46)",
-   "calendar": "Cours",
-   "color": "#f472b6"
-  },
-  {
-   "id": "ADE60323032362d323032372d31313132342d302d33|2026-12-11T08:30:00+04:00",
-   "title": "4A INFO-TP2-CYBERSECURITE:METHODOLOGIES DE SECURITE OFFENSIVE",
-   "start": "2026-12-11T08:30:00+04:00",
-   "end": "2026-12-11T10:30:00+04:00",
-   "allDay": false,
-   "location": "A100 - Info / Réseaux",
-   "description": "Informatique 4A Groupe 2\nRAZAFINDRALAMBO TAHIRY\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 1\nTOURNOUX PIERRE UGO\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -610,7 +577,18 @@
    "end": "2026-12-11T10:30:00+04:00",
    "allDay": false,
    "location": "A101 - Info / Multimédia",
-   "description": "Informatique 4A Groupe 1\nMOTAIS DE NARBONNE BERENICE\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 1\nMOTAIS DE NARBONNE BERENICE\n(Exported :27/11/2026 04:20)",
+   "calendar": "Cours",
+   "color": "#f472b6"
+  },
+  {
+   "id": "ADE60323032362d323032372d31313132342d302d33|2026-12-11T08:30:00+04:00",
+   "title": "4A INFO-TP2-CYBERSECURITE:METHODOLOGIES DE SECURITE OFFENSIVE",
+   "start": "2026-12-11T08:30:00+04:00",
+   "end": "2026-12-11T10:30:00+04:00",
+   "allDay": false,
+   "location": "A100 - Info / Réseaux",
+   "description": "Informatique 4A Groupe 2\nRAZAFINDRALAMBO TAHIRY\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -621,7 +599,7 @@
    "end": "2026-12-11T12:30:00+04:00",
    "allDay": false,
    "location": "A101 - Info / Multimédia",
-   "description": "Informatique 4A Groupe 2\nMOTAIS DE NARBONNE BERENICE\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 2\nMOTAIS DE NARBONNE BERENICE\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -632,7 +610,7 @@
    "end": "2026-12-11T12:30:00+04:00",
    "allDay": false,
    "location": "A100 - Info / Réseaux",
-   "description": "Informatique 4A Groupe 1\nRAZAFINDRALAMBO TAHIRY\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 1\nRAZAFINDRALAMBO TAHIRY\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -643,7 +621,7 @@
    "end": "2026-12-11T15:30:00+04:00",
    "allDay": false,
    "location": "A100 - Info / Réseaux",
-   "description": "Informatique 4A Groupe 1\nPAYET DENIS\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 1\nPAYET DENIS\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -654,7 +632,7 @@
    "end": "2026-12-11T17:30:00+04:00",
    "allDay": false,
    "location": "A100 - Info / Réseaux",
-   "description": "Informatique 4A Groupe 2\nPAYET DENIS\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 2\nPAYET DENIS\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -665,7 +643,7 @@
    "end": "2026-12-14T18:00:00+04:00",
    "allDay": false,
    "location": "",
-   "description": "Informatique 4A Groupe 1\nInformatique 4A Groupe 2\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 1\nInformatique 4A Groupe 2\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -676,7 +654,7 @@
    "end": "2026-12-15T10:30:00+04:00",
    "allDay": false,
    "location": "A101 - Info / Multimédia",
-   "description": "Informatique 4A Groupe 1\nTOURNOUX PIERRE UGO\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 1\nTOURNOUX PIERRE UGO\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -687,7 +665,7 @@
    "end": "2026-12-15T12:30:00+04:00",
    "allDay": false,
    "location": "A101 - Info / Multimédia",
-   "description": "Informatique 4A Groupe 2\nTOURNOUX PIERRE UGO\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 2\nTOURNOUX PIERRE UGO\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -698,7 +676,7 @@
    "end": "2026-12-16T10:30:00+04:00",
    "allDay": false,
    "location": "A101 - Info / Multimédia",
-   "description": "Informatique 4A Groupe 1\nTOURNOUX PIERRE UGO\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 1\nTOURNOUX PIERRE UGO\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -709,7 +687,7 @@
    "end": "2026-12-16T12:30:00+04:00",
    "allDay": false,
    "location": "A200 - Amphi Jean-Claude Galichet",
-   "description": "CYCLE INGENIEUR AGROALIMENTAIRE (2EME ANNEE)\nCYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nCYCLE INGENIEUR BATIMENT-ENERGIE (2EME ANNEE)\nDOUBLET FABRICE\n(Exported :26/11/2026 19:46)",
+   "description": "CYCLE INGENIEUR AGROALIMENTAIRE (2EME ANNEE)\nCYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nCYCLE INGENIEUR BATIMENT-ENERGIE (2EME ANNEE)\nDOUBLET FABRICE\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -720,7 +698,7 @@
    "end": "2026-12-17T10:30:00+04:00",
    "allDay": false,
    "location": "A101 - Info / Multimédia",
-   "description": "Informatique 4A Groupe 2\nTOURNOUX PIERRE UGO\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 2\nTOURNOUX PIERRE UGO\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -731,7 +709,7 @@
    "end": "2026-12-17T12:30:00+04:00",
    "allDay": false,
    "location": "A101 - Info / Multimédia",
-   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nHARIVELO FANILO\n(Exported :26/11/2026 19:46)",
+   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nHARIVELO FANILO\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -742,7 +720,7 @@
    "end": "2026-12-18T15:30:00+04:00",
    "allDay": false,
    "location": "A100 - Info / Réseaux",
-   "description": "Informatique 4A Groupe 1\nPAYET DENIS\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 1\nPAYET DENIS\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -753,18 +731,7 @@
    "end": "2026-12-18T15:30:00+04:00",
    "allDay": false,
    "location": "A103 - Salle info commune",
-   "description": "Informatique 4A Groupe 2\n(Exported :26/11/2026 19:46)",
-   "calendar": "Cours",
-   "color": "#f472b6"
-  },
-  {
-   "id": "ADE60323032362d323032372d32303831322d302d33|2026-12-18T15:30:00+04:00",
-   "title": "4A INFO-TP2-PROGRAMMATION MOBILE",
-   "start": "2026-12-18T15:30:00+04:00",
-   "end": "2026-12-18T17:30:00+04:00",
-   "allDay": false,
-   "location": "A100 - Info / Réseaux",
-   "description": "Informatique 4A Groupe 2\nPAYET DENIS\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 2\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -775,7 +742,18 @@
    "end": "2026-12-18T17:30:00+04:00",
    "allDay": false,
    "location": "A103 - Salle info commune",
-   "description": "Informatique 4A Groupe 1\n(Exported :26/11/2026 19:46)",
+   "description": "Informatique 4A Groupe 1\n(Exported :27/11/2026 04:20)",
+   "calendar": "Cours",
+   "color": "#f472b6"
+  },
+  {
+   "id": "ADE60323032362d323032372d32303831322d302d33|2026-12-18T15:30:00+04:00",
+   "title": "4A INFO-TP2-PROGRAMMATION MOBILE",
+   "start": "2026-12-18T15:30:00+04:00",
+   "end": "2026-12-18T17:30:00+04:00",
+   "allDay": false,
+   "location": "A100 - Info / Réseaux",
+   "description": "Informatique 4A Groupe 2\nPAYET DENIS\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -819,7 +797,7 @@
    "end": "2027-02-20T12:00:00+04:00",
    "allDay": false,
    "location": "A200 - Amphi Jean-Claude Galichet,A106 - Multimédia / Langues",
-   "description": "CYCLE INGENIEUR AGROALIMENTAIRE (2EME ANNEE)\nCYCLE INGENIEUR BATIMENT-ENERGIE (2EME ANNEE)\nCYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nCYCLE INGENIEUR BATIMENT-ENERGIE (3EME ANNEE)\n(Exported :26/11/2026 19:46)",
+   "description": "CYCLE INGENIEUR AGROALIMENTAIRE (2EME ANNEE)\nCYCLE INGENIEUR BATIMENT-ENERGIE (2EME ANNEE)\nCYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\nCYCLE INGENIEUR BATIMENT-ENERGIE (3EME ANNEE)\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   },
@@ -841,7 +819,7 @@
    "end": "2027-04-13T15:00:00+04:00",
    "allDay": false,
    "location": "",
-   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\n(Exported :26/11/2026 19:46)",
+   "description": "CYCLE INGENIEUR INFORMATIQUE (2EME ANNEE)\n(Exported :27/11/2026 04:20)",
    "calendar": "Cours",
    "color": "#f472b6"
   }
